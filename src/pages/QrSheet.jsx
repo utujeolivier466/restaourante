@@ -50,7 +50,7 @@ function Sheet({ staff }) {
   return (
     <main className="pad wide">
       <div className="noprint">
-        <div className="row between"><h1>QR codes</h1><a href="/staff">Back to room</a></div>
+        <div className="row between"><h1>QR codes</h1></div>
         <p className="muted">One card per table. Print at 100% scale on A4 (6 per page), then cut, laminate and place on each table.</p>
         <label className="muted">Website address used in the QR codes</label>
         <input style={{ width: '100%' }} value={base} onChange={(e) => setBase(e.target.value)} />

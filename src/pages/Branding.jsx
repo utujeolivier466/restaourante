@@ -32,7 +32,7 @@ function Form({ rid }) {
   }
   return (
     <main className="pad wide">
-      <div className="row between"><h1>Branding</h1><a href="/staff">Back to room</a></div>
+      <div className="row between"><h1>Branding</h1></div>
       <div className="split">
         <div className="fields">
           <label>Restaurant name<input value={f.name} onChange={set('name')} /></label>

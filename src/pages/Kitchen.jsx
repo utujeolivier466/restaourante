@@ -22,7 +22,7 @@ function Tickets({ staff }) {
 
   return (
     <main className="pad wide">
-      <div className="row between"><h1>Kitchen</h1><button onClick={() => supabase.auth.signOut()}>Sign out</button></div>
+      <div className="row between"><h1>Kitchen</h1></div>
       {orders.length === 0 && <p className="muted">No orders in the kitchen.</p>}
       <div className="tickets">
         {orders.map((o) => (

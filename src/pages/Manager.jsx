@@ -57,7 +57,7 @@ function Editor({ rid }) {
 
   return (
     <main className="pad wide">
-      <div className="row between"><h1>Menu</h1><a href="/staff">Back to room</a></div>
+      <div className="row between"><h1>Menu</h1></div>
       {msg && <p className="note">{msg}</p>}
       <details>
         <summary>Import many items at once</summary>

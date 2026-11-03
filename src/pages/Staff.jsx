@@ -22,7 +22,7 @@ function Room({ staff }) {
 
   return (
     <main className="pad wide">
-      <div className="row between"><h1>Room</h1>{staff.role === 'manager' && <><a href="/manager">Edit menu</a><a href="/qr">QR codes</a><a href="/branding">Branding</a></>}<button onClick={() => supabase.auth.signOut()}>Sign out</button></div>
+      <div className="row between"><h1>Room</h1></div>
       <div className="grid">
         {rows.map((r) => {
           const cls = r.open_calls > 0 ? 'call' : r.session_status === 'pending' ? 'wait' : r.session_status === 'bill_requested' ? 'bill' : r.session_status ? 'on' : 'free'

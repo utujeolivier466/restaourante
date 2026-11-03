@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
 export const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_ANON_KEY)
@@ -21,14 +21,16 @@ export async function ensureGuest() {
 
 // Realtime: run onChange now and after every change to the given tables (RLS limits what arrives)
 export function useLive(tables, onChange, onEvent) {
+  const cb = useRef(onChange), ev = useRef(onEvent)
+  cb.current = onChange; ev.current = onEvent
   useEffect(() => {
-    onChange()
+    cb.current()
     const ch = supabase.channel('live-' + Math.random().toString(36).slice(2))
     tables.forEach((t) =>
-      ch.on('postgres_changes', { event: '*', schema: 'public', table: t }, (p) => { onEvent?.(t, p); onChange() })
-    )
+      ch.on('postgres_changes', { event: '*', schema: 'public', table: t }, (p) => { ev.current?.(t, p); cb.current() }))
     ch.subscribe()
-    return () => { supabase.removeChannel(ch) }
+    const poll = setInterval(() => cb.current(), 8000) // safety net if the websocket drops
+    return () => { clearInterval(poll); supabase.removeChannel(ch) }
   }, []) // eslint-disable-line
 }
 
